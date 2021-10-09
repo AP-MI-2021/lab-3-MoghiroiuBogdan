@@ -30,6 +30,7 @@ def alternate_signs(l):
             ok = 0
     return True
 
+
 def get_longest_alternating_signs(l):
     '''
     deter cea mai lunga subsecventa cu prorpietatea ca nr au semne alternante
@@ -39,9 +40,9 @@ def get_longest_alternating_signs(l):
     subsMax = []
 
     for i in range(len(l)):
-        for j in range(i, len(l)):
-            if alternate_signs(l[i:j + 1]) and len(l[i:j + 1]) > len(subsMax):
-                subsMax = l[i:j + 1]
+        for j in range(i+1, len(l)):
+            if alternate_signs(l[i:j+1]) and len(l[i:j+1]) > len(subsMax):
+                subsMax = l[i:j+1]
 
     return subsMax
 
