@@ -31,6 +31,11 @@ def alternate_signs(l):
     return True
 
 def get_longest_alternating_signs(l):
+    '''
+    deter cea mai lunga subsecventa cu prorpietatea ca nr au semne alternante
+    :param l: lista
+    :return: subsecventa maxima
+    '''
     subsMax = []
 
     for i in range(len(l)):
@@ -64,6 +69,11 @@ def all_nr_are_prime(n):
 
 
 def get_longest_prime_digits(lst):
+    '''
+    deter cea mai lunga subsecventa cu prorpietatea ca nr sunt formate din cifre prime
+    :param lst: lista
+    :return: subsecventa maxima
+    '''
     subsecvMax = []
 
     for i in range(len(lst)):
