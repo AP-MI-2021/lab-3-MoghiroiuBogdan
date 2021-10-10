@@ -1,3 +1,6 @@
+from copy import copy
+
+
 def citire_lista():
     l = []
     givenString = input("dati lista=")
@@ -14,20 +17,10 @@ def alternate_signs(l):
     :param l: lista formata din nr intregi
     :return: true sau false
     '''
-    if l[0] > 0:
-        ok = 1
-    else:
-        ok = 0
 
-    for i in l[1:len(l)]:
-        if ok == 1 and i > 0:
+    for i in range(1,len(l)):
+        if l[i]* l[i-1] > 0:
             return False
-        if ok == 0 and i < 0:
-            return False
-        if i > 0:
-            ok = 1
-        else:
-            ok = 0
     return True
 
 
