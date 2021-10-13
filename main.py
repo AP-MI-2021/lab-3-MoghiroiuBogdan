@@ -1,13 +1,10 @@
-from copy import copy
-
-
 def citire_lista():
     l = []
     givenString = input("dati lista=")
     numberAsString = givenString.split(",")
 
     for x in (numberAsString):
-        l.append(int(x))
+        l.append(float(x))
     return l
 
 
@@ -18,8 +15,8 @@ def alternate_signs(l):
     :return: true sau false
     '''
 
-    for i in range(1,len(l)):
-        if l[i]* l[i-1] > 0:
+    for i in range(1, len(l)):
+        if l[i] * l[i-1] > 0:
             return False
     return True
 
@@ -83,15 +80,61 @@ def test_get_longest_prime_digits():
     assert get_longest_prime_digits([4, 6, 7, 23]) == [7, 23]
 
 
+def nr_cif(x):
+    '''
+    determina numarul de cifre dintr un numar
+    :param x:un nr -> float
+    :return: nr de cifre
+    '''
+    p = 1
+    while x != int(x):
+        p = p*10
+        x = x*10
+    return p
+
+
+def all_nr_cif(l):
+    '''
+    verifica daca partea fractionara = partea intreaga
+    :param l: lista de float uri
+    :return: true sau false
+    '''
+    for i in l:
+        if int(i) != i*nr_cif(i) - int(i)*nr_cif(i):
+            return False
+    return True
+
+
+def get_longest_equal_int_real(l):
+    '''
+    determina cea mai lunga subsecventa cu proprietatea ca nr au partea frationara = partea intreaga
+    :param l:lista de float uri
+    :return: cea mai lunga subsecventa cu proprietatea ca nr au partea frationara = partea intreaga
+    '''
+    subMax=[]
+    for i in range(len(l)):
+        for j in range(i,len(l)):
+            if all_nr_cif(l[i:j+1]) and len(l[i:j+1]) > len(subMax):
+                subMax=l[i:j+1]
+    return subMax
+
+
+def test_get_longest_equal_int_real():
+    assert get_longest_equal_int_real([12.12, 13.13, 15.15, 12.45]) == [12.12, 13.13, 15.15]
+    assert get_longest_equal_int_real([12,14,16]) == []
+
+
 def main():
     l = []
     test_get_longest_prime_digits()
     test_get_longest_alternating_signs()
+    test_get_longest_equal_int_real()
     while True:
         print("1.Citire date:")
         print("2.cea mai lunga subsecventa cu proprietatea ca nr au semne alternante")
         print("3.cea mai lunga subsecventa cu proprietatea ca nr au toate cifrele prime")
-        print("4.iesire")
+        print("4.cea mai lunga subsecventa cu proprietatea ca nr au partea frationara = partea intreaga")
+        print("5.Iesire")
         option = input("dati nr:")
 
         if option == "1":
@@ -104,6 +147,9 @@ def main():
             print(get_longest_prime_digits(l))
 
         elif option == "4":
+            print(get_longest_equal_int_real(l))
+
+        elif option == "5":
             break
 
         else:
